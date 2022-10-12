@@ -1,0 +1,217 @@
+package Linked_list;
+
+import java.util.Scanner;
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class Link_list_creation {
+     Node Head=null;
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int k=sc.nextInt();
+        Link_list_creation ll=new Link_list_creation();
+        for(int i=0; i<n; i++){
+            int data = sc.nextInt();
+            ll.insertNode(data);
+        }
+      //  string_sort(ll.Head);
+
+        ll.print();
+        System.out.println();
+        ll.Head=swapkthnode(ll.Head,n,k);
+        //ll.Head=ll.ReverseAlternateK(ll.Head,k);
+        ll.print();
+//        if(IsPalindrome(ll.Head)){
+//            System.out.println("yes");
+//        }else{
+//            System.out.println("No");
+//        }
+
+    }
+    private void print() {
+        Node tmp = this.Head;
+
+        while (tmp != null) {
+            System.out.print(tmp.data+" ");
+            tmp = tmp.next;
+        }
+    }
+
+    private void insertNode(int data) {
+        Node node=new Node(data);
+        if(this.Head == null){
+            Head=node;
+        }else{
+            Node temp=Head;
+            while(temp.next!=null){
+                temp=temp.next;
+            }temp.next=node;
+        }
+    }
+//    static Node swapkthnode(Node head, int num, int K)
+//    {
+//        int arr=new int[num];
+//        Node temp=head;
+//        Node temp2=head;
+//        while(temp!=null)
+//            arr[i]=head.data;
+//        temp=temp.next;
+//    }
+//    swap(arr,K-1,num-K-1);
+//    int j=0;
+//      while(num-->=0){
+//        temp2.data=arr[j++];
+//        temp2=temp2.next;
+//    }
+//}
+    static void swap(int[] arr, int a, int b){
+        int temp=arr[a];
+        arr[a]=arr[b];
+        arr[b]=temp;
+    }
+    public static Node ReverseAlternateK(Node head,int k){
+        if(head==null || head.next==null)
+            return head;
+        Node pre=null;
+        Node curr=head;
+        int count =0;
+        while(curr!=null && count<k){
+            Node temp=curr.next;
+            curr.next=pre;
+            pre=curr;
+            curr=temp;
+            count++;
+        }
+        if(curr!=null)
+            head.next=ReverseAlternateK(curr,k);
+        return pre;
+    }
+//    public static boolean IsPalindrome(Node head) {
+//        Node mid=find_Mid(head);
+//        Node n=revers(mid.next);
+//        boolean flag=true;
+//        while(n!=null){
+//            if(head.data!=n.data){
+//                flag=false;
+//                break;
+//            }
+//            head=head.next;
+//            n=n.next;
+//        }
+//        return flag;
+//    }
+//    public static Node find_Mid(Node head){
+//        Node slow=head;
+//        Node fast=head;
+//        while(fast!=null && fast.next!=null){
+//            slow=slow.next;
+//            fast=fast.next.next;
+//        } return slow;
+//    }
+//    public static Node revers(Node head){
+//        if(head==null || head.next==null){
+//            return head;
+//        }
+//        Node pre=null,curr=head;
+//        while(curr!=null){
+//            Node temp=curr.next;
+//            curr.next=pre;
+//            pre=curr;
+//            curr=temp;
+//        }return pre;
+//    }
+
+
+//    static void string_sort(Node head){
+//        head=mergeSort(head);
+//
+//    }
+//    static Node mergeSort(Node head)
+//    {
+//        if (head.next == null)
+//            return head;
+//
+//        Node mid = findMid(head);
+//        Node head2 = mid.next;
+//        mid.next = null;
+//        Node newHead1 = mergeSort(head);
+//        Node newHead2 = mergeSort(head2);
+//        Node finalHead = merge(newHead1, newHead2);
+//
+//        return finalHead;
+//    }
+//    static Node merge(Node head1, Node head2)
+//    {
+//        Node merged = new Node('Z');
+//        Node temp = merged;
+//        while (head1 != null && head2 != null) {
+//            if (head1.data < head2.data) {
+//                temp.next = head1;
+//                head1 = head1.next;
+//            }
+//            else {
+//                temp.next = head2;
+//                head2 = head2.next;
+//            }
+//            temp = temp.next;
+//        }
+//        while (head1 != null) {
+//            temp.next = head1;
+//            head1 = head1.next;
+//            temp = temp.next;
+//        }
+//        while (head2 != null) {
+//            temp.next = head2;
+//            head2 = head2.next;
+//            temp = temp.next;
+//        }
+//        return merged.next;
+//    }
+//    static Node findMid(Node head)
+//    {
+//        Node slow = head, fast = head.next;
+//        while (fast != null && fast.next != null) {
+//            slow = slow.next;
+//            fast = fast.next.next;
+//        }
+//        return slow;
+//    }
+//    static int decimalValue(Node head)
+//    {
+//        //int ans=0;
+//        Node temp=head;
+//        int res=0;
+//        while(temp!=null){
+//            res=(res*2)+temp.data;
+//            //ans=res;
+//            temp=temp.next;
+//        } return res;
+//    }
+//    public static Node segregation (Node head)
+//    {
+//        if(head==null || head.next==null){
+//            return head;
+//        }
+//        Node odd=head, even=head.next, evenStart=even;
+//        while(odd.next != null  && even.next != null){
+//            odd.next=even.next;
+//            odd=odd.next;
+//            even.next=odd.next;
+//            even=even.next;
+//
+//        }
+//        odd.next=evenStart;
+//        if(odd.next != null){
+//            even.next=null;
+//        }
+//        return head;
+//    }
+}
