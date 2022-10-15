@@ -39,7 +39,7 @@ div > img{
 .cards{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 10px;
     box-sizing: border-box;
     /* margin: 5px; */
